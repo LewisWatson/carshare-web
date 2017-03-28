@@ -1,0 +1,25 @@
+.trip-card {
+  max-width: 800px;
+  margin: auto;
+}
+
+.fab {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  color: white;
+}
+
+.driver-avatar {
+  font-size: 2.7em;
+}
+
+.passenger {
+  display: inline-flex;
+  justify-content: left;
+  margin-right: 0.5em;
+}
+
+.passenger-avatar {
+  margin-right: 0.2em;
+}
