@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 
 - Rename project to `carshare-web`, with new repo
-- Upgrade to Angular 4, call it it carshare-angular2 no longer makes sense :)
+- Upgrade to Angular 4, calling it `carshare-angular2` no longer makes sense :)
 
 ### Added
 
@@ -21,3 +21,4 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Trip Data Service
 - Car Share Data Service
 - App shell using service workers
+- Dockerfile
