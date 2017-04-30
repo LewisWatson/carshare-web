@@ -1,16 +1,26 @@
-# Car Share Web
+# carshare-web
 
 [Progressive Web App] for the [carshare-back api].
 
 Easily track the distance car share members travel as passengers and as drivers. Members can make informed decisions about who should drive based on the ratio of miles as passenger/driver.
 
-## Deploy
+## Firebase Deploy
 
 ```bash
 ng build --prod --aot
 npm run precache
 firebase deploy
 ```
+
+## Docker
+
+```bash
+ng build --prod --aot
+npm run precache
+docker build -t carshare-web .
+```
+
+Pre-made images are available as [lewiswatson/carshare-web](https://hub.docker.com/r/lewiswatson/carshare-web/)
 
 ## License
 
