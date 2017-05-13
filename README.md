@@ -1,5 +1,7 @@
 # carshare-web
 
+[![Build Status](https://travis-ci.org/LewisWatson/carshare-web.svg?branch=master)](https://travis-ci.org/LewisWatson/carshare-web)
+
 [Progressive Web App] for the [carshare-back api].
 
 Easily track the distance car share members travel as passengers and as drivers. Members can make informed decisions about who should drive based on the ratio of miles as passenger/driver.
