@@ -9,8 +9,8 @@ import { SignInComponent } from './components/sign-in/sign-in.component';
   imports: [
     CommonModule,
     AuthRoutingModule,
-    MaterialModule.forRoot()
-  ],
+    MaterialModule,
+      ],
   declarations: [
     SignInComponent
   ]

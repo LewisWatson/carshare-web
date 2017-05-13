@@ -14,7 +14,7 @@ import { TripDetailComponent} from './trip-detail/trip-detail.component';
     CommonModule,
     CarShareRoutingModule,
     ReactiveFormsModule,
-    MaterialModule.forRoot()
+    MaterialModule,
   ],
   declarations: [
     CarShareListComponent,
