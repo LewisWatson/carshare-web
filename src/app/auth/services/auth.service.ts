@@ -17,13 +17,16 @@ export class AuthService {
   constructor(public fAuth: AngularFireAuth, private router: Router, private dataStore: DataStoreService) {
 
     fAuth.authState.subscribe((user: firebase.User) => {
+
+      console.log('auth state change');
+
       this.user = user;
       if (user) {
 
         user.getToken().then(
           function (token) {
-            console.log("token " + token);
-            localStorage.setItem("authToken", token);
+            console.log('token ' + token);
+            localStorage.setItem('authToken', token);
             this.dataStore.updateAuthToken();
           }.bind(this)
         ).catch(
@@ -36,7 +39,6 @@ export class AuthService {
   }
 
   get authenticated(): boolean {
-    console.log("checking if authenticated "+ this.user);
     return this.user !== null;
   }
 
