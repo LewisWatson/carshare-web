@@ -6,7 +6,9 @@ import { MaterialModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { JsonApiModule } from 'angular2-jsonapi';
-import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
+
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { AppComponent } from './app.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
@@ -22,17 +24,13 @@ import { CarShareModule } from './car-share/car-share.module';
 
 import 'hammerjs';
 
-const firebaseConfig = {
+const firebaseAppConfig = {
   apiKey: "AIzaSyCf8me1ihwXzJU3GJTxI4TtF1uo_gfmStU",
   authDomain: "ridesharelogger.com",
   databaseURL: "https://ridesharelogger.firebaseio.com",
   storageBucket: "ridesharelogger.appspot.com",
-  messagingSenderId: "549212301269"
-};
-
-const firebaseAuthConfig = {
-  method: AuthMethods.Redirect,
-  remember: 'default'
+  messagingSenderId: "549212301269",
+  projectId: "ridesharelogger",
 };
 
 @NgModule({
@@ -49,7 +47,8 @@ const firebaseAuthConfig = {
     HttpModule,
     JsonApiModule,
     MaterialModule,
-    AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig),
+    AngularFireModule.initializeApp(firebaseAppConfig),
+    AngularFireAuthModule,
     AuthModule,
     CarShareModule,
     AppRoutingModule

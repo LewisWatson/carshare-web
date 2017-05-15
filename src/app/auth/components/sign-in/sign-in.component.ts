@@ -24,26 +24,6 @@ export class SignInComponent implements OnInit {
       .then(() => this.postSignIn());
   }
 
-  signInWithGithub(): void {
-    this.auth.signInWithGithub()
-      .then(() => this.postSignIn());
-  }
-
-  signInWithGoogle(): void {
-    this.auth.signInWithGoogle()
-      .then(() => this.postSignIn());
-  }
-
-  signInWithTwitter(): void {
-    this.auth.signInWithTwitter()
-      .then(() => this.postSignIn());
-  }
-
-  signInWithFacebook(): void {
-    this.auth.signInWithFacebook()
-      .then(() => this.postSignIn());
-  }
-
   private postSignIn(): void {
 
     if (this.auth.authenticated) {
@@ -55,7 +35,7 @@ export class SignInComponent implements OnInit {
       // Set our navigation extras object
       // that passes on our global query params and fragment
       let navigationExtras: NavigationExtras = {
-        preserveQueryParams: true,
+        queryParamsHandling: "merge",
         preserveFragment: true
       };
 
