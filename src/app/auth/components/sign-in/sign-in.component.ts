@@ -16,53 +16,31 @@ export class SignInComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    this.titleService.setTitle("Sign In");
+    this.titleService.setTitle('Sign In');
   }
 
   signInAnonymously(): void {
     this.auth.signInAnonymously()
-      .then(() => this.postSignIn());
-  }
-
-  signInWithGithub(): void {
-    this.auth.signInWithGithub()
-      .then(() => this.postSignIn());
-  }
-
-  signInWithGoogle(): void {
-    this.auth.signInWithGoogle()
-      .then(() => this.postSignIn());
-  }
-
-  signInWithTwitter(): void {
-    this.auth.signInWithTwitter()
-      .then(() => this.postSignIn());
-  }
-
-  signInWithFacebook(): void {
-    this.auth.signInWithFacebook()
-      .then(() => this.postSignIn());
+      .then((user) => {
+        this.postSignIn();
+      })
+      .catch(e => console.error(`Anonymous Login Failure:`, e));
   }
 
   private postSignIn(): void {
 
-    if (this.auth.authenticated) {
+    // Get the redirect URL from our auth service
+    // If no redirect has been set, use the default
+    const redirect = this.auth.redirectUrl ? this.auth.redirectUrl : '/carshares';
 
-      // Get the redirect URL from our auth service
-      // If no redirect has been set, use the default
-      let redirect = this.auth.redirectUrl ? this.auth.redirectUrl : '/carshares';
+    // Set our navigation extras object
+    // that passes on our global query params and fragment
+    const navigationExtras: NavigationExtras = {
+      queryParamsHandling: 'merge',
+      preserveFragment: true
+    };
 
-      // Set our navigation extras object
-      // that passes on our global query params and fragment
-      let navigationExtras: NavigationExtras = {
-        preserveQueryParams: true,
-        preserveFragment: true
-      };
-
-      // Redirect the user
-      this.router.navigate([redirect], navigationExtras);
-    } else {
-      console.log("login failed");
-    }
+    // Redirect the user
+    this.router.navigate([redirect], navigationExtras);
   }
 }

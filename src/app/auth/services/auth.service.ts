@@ -1,24 +1,32 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Headers } from '@angular/http';
-import { AuthProviders, AuthMethods, AngularFire, FirebaseAuthState } from 'angularfire2';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { Observable } from 'rxjs/Observable';
+import * as firebase from 'firebase/app';
 import { DataStoreService } from '../../data-store.service';
 
 @Injectable()
 export class AuthService {
-  private authState: FirebaseAuthState = null;
+
+  private user: firebase.User;
 
   // store the URL so we can redirect after logging in
-  redirectUrl: string;
+  public redirectUrl: string;
 
-  constructor(public af: AngularFire, private router: Router, private dataStore: DataStoreService) {
-    af.auth.subscribe((state: FirebaseAuthState) => {
-      this.authState = state;
-      if (state) {
-        state.auth.getToken().then(
+  constructor(public fAuth: AngularFireAuth, private router: Router, private dataStore: DataStoreService) {
+
+    fAuth.authState.subscribe((user: firebase.User) => {
+
+      console.log('auth state change');
+
+      this.user = user;
+      if (user) {
+
+        user.getToken().then(
           function (token) {
-            console.log("token " + token);
-            localStorage.setItem("authToken", token);
+            console.log('token ' + token);
+            localStorage.setItem('authToken', token);
             this.dataStore.updateAuthToken();
           }.bind(this)
         ).catch(
@@ -31,47 +39,20 @@ export class AuthService {
   }
 
   get authenticated(): boolean {
-    return this.authState !== null;
+    return this.user !== null;
   }
 
   get id(): string {
-    return this.authenticated ? this.authState.uid : '';
+    return this.authenticated ? this.user.uid : '';
   }
 
-  signIn(provider: number): firebase.Promise<FirebaseAuthState> {
-    return this.af.auth.login({ provider })
-      .catch(error => console.log('ERROR @ AuthService#signIn() :', error));
-  }
-
-  signInAnonymously(): firebase.Promise<FirebaseAuthState> {
-
-    var promise = this.af.auth.login({
-      provider: AuthProviders.Anonymous,
-      method: AuthMethods.Anonymous
-    })
-      .catch(error => console.log('ERROR @ AuthService#signInAnonymously() :', error));
-
-    return promise;
-  }
-
-  signInWithGithub(): firebase.Promise<FirebaseAuthState> {
-    return this.signIn(AuthProviders.Github);
-  }
-
-  signInWithGoogle(): firebase.Promise<FirebaseAuthState> {
-    return this.signIn(AuthProviders.Google);
-  }
-
-  signInWithTwitter(): firebase.Promise<FirebaseAuthState> {
-    return this.signIn(AuthProviders.Twitter);
-  }
-
-  signInWithFacebook(): firebase.Promise<FirebaseAuthState> {
-    return this.signIn(AuthProviders.Facebook);
+  signInAnonymously(): firebase.Promise<firebase.User> {
+    return this.fAuth.auth.signInAnonymously();
   }
 
   signOut(): void {
-    this.af.auth.logout().then(
+
+    this.fAuth.auth.signOut().then(
       () => this.router.navigate(['/login'])
     )
       .catch(error => console.log('ERROR @ AuthService#signOut() :', error));
