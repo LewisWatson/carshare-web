@@ -8,4 +8,19 @@ export class User extends JsonApiModel {
 
     @Attribute()
     username: string;
+
+    @Attribute()
+    firebaseUID: string;
+
+    @Attribute()
+    displayName: string;
+
+    @Attribute()
+    email: string;
+
+    @Attribute()
+    photoURL: string;
+
+    @Attribute()
+    isAnon: boolean;
 }

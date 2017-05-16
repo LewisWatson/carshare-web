@@ -23,7 +23,7 @@ export class CarShareListComponent implements OnInit {
 
   ngOnInit() {
     this.getCarShares();
-    this.titleService.setTitle("Car Shares");
+    this.titleService.setTitle('Car Shares');
   }
 
   getCarShares(): void {

@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
-import { ActivatedRoute, Params }   from '@angular/router';
-import { Location }                 from '@angular/common';
-import { ErrorResponse } from "angular2-jsonapi";
+import { ActivatedRoute, Params } from '@angular/router';
+import { Location } from '@angular/common';
+import { ErrorResponse } from 'angular2-jsonapi';
 import { CarShare } from '../car-share';
 import { User } from '../user';
 import { DataStoreService } from '../data-store.service';
@@ -23,8 +23,8 @@ export class UserDetailComponent implements OnInit {
 
   constructor(
     private dataStoreService: DataStoreService,
-    private titleService: Title, 
-    public fb: FormBuilder, 
+    private titleService: Title,
+    public fb: FormBuilder,
     private route: ActivatedRoute,
     private location: Location) {
     this.form = this.fb.group({
@@ -67,17 +67,17 @@ export class UserDetailComponent implements OnInit {
           this.goBack()
         }
       }
-    );
+      );
   }
 
   addUserToMembers(user: User, trip: Trip) {
     console.log("add users to members");
-    if(!trip.carShare.members) {
+    if (!trip.carShare.members) {
       trip.carShare.members = new Array();
     }
     trip.carShare.members.push(user);
 
-    if(!trip.passengers) {
+    if (!trip.passengers) {
       trip.passengers = new Array();
     }
     trip.passengers.push(user);
@@ -95,7 +95,8 @@ export class UserDetailComponent implements OnInit {
           this.goBack()
         }
       }
-    );}
+    );
+  }
 
   goBack(): void {
     this.location.back();

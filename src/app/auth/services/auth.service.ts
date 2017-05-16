@@ -18,14 +18,13 @@ export class AuthService {
 
     fAuth.authState.subscribe((user: firebase.User) => {
 
-      console.log('auth state change');
-
       this.user = user;
       if (user) {
 
+        console.log('user signed in');
+
         user.getToken().then(
           function (token) {
-            console.log('token ' + token);
             localStorage.setItem('authToken', token);
             this.dataStore.updateAuthToken();
           }.bind(this)
@@ -34,6 +33,8 @@ export class AuthService {
             console.log(error);
           }
           );
+      } else {
+        console.log('user signed out');
       }
     });
   }
