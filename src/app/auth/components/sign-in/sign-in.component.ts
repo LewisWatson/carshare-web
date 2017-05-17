@@ -35,56 +35,18 @@ export class SignInComponent implements OnInit {
 
   private getAPIUser(fbUser: firebase.User): void {
 
-    console.log('querying existing carshare-api user');
+    console.log('creating/updating carshare-api user');
 
-    this.dataStoreService.query(User, {
+    this.dataStoreService.createRecord(User, {
       'firebase-uid': fbUser.uid,
-    }).subscribe((users: User[]) => {
-
-      if (users.length === 0) {
-
-        console.log('no user found in carshare-api. Creating one')
-
-        this.dataStoreService.createRecord(User, {
-          firebaseUID: fbUser.uid,
-        }).subscribe(
-          (user: User) => {
-            console.log('sucessfully created a user in carshare-api');
-            this.updateAPIUser(user, fbUser)
-          },
-          (errorResponse) => {
-            if (errorResponse instanceof ErrorResponse) {
-              // do something with errorResponse
-              console.log('ErrorResponse')
-              console.log(errorResponse.errors);
-            } else {
-              console.log('not error response');
-              console.log(errorResponse);
-            }
-          }
-          );
-      } else {
-        console.log('found existing carshare-api user');
-        this.updateAPIUser(users[0], fbUser);
-      }
-
-    });
-  }
-
-  private updateAPIUser(user: User, fbUser: firebase.User): void {
-
-    console.log('updating carshare-api user with latest information from firebase');
-
-    user.firebaseUID = fbUser.uid;
-    user.email = fbUser.email;
-    user.isAnon = fbUser.isAnonymous;
-    user.photoURL = fbUser.photoURL;
-    user.displayName = fbUser.displayName;
-
-    user.save().subscribe(
+      'email': fbUser.email,
+      'is-anon': fbUser.isAnonymous,
+      'photo-url': fbUser.photoURL,
+      'display-name': fbUser.displayName,
+    }).save().subscribe(
       (user: User) => {
-        console.log('carshare-api user updated');
-        this.postUserSync();
+        console.log('sucessfully created/updated carshare-api user');
+        this.redirect();
       },
       (errorResponse) => {
         if (errorResponse instanceof ErrorResponse) {
@@ -96,10 +58,10 @@ export class SignInComponent implements OnInit {
           console.log(errorResponse);
         }
       }
-    );
+      );
   }
 
-  private postUserSync(): void {
+  private redirect(): void {
 
     console.log('succesfully signed in with both firebase and carshare-api. Redirecting user');
 
