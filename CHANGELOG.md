@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - Rename project to `carshare-web`, with new repo
 - Upgrade to Angular 4, calling it `carshare-angular2` no longer makes sense :)
+- Add npm shrinkwrap
 
 ### Added
 
