@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { MaterialModule } from '@angular/material';
+import { MdButtonModule, MdCheckboxModule, MdMenuModule, MdCardModule, MdToolbarModule, MdInputModule, MdIconModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { JsonApiModule } from 'angular2-jsonapi';
@@ -46,7 +46,13 @@ const firebaseAppConfig = {
     BrowserAnimationsModule,
     HttpModule,
     JsonApiModule,
-    MaterialModule,
+    MdButtonModule,
+    MdCheckboxModule,
+    MdCardModule,
+    MdMenuModule,
+    MdToolbarModule,
+    MdInputModule,
+    MdIconModule,
     AngularFireModule.initializeApp(firebaseAppConfig),
     AngularFireAuthModule,
     AuthModule,

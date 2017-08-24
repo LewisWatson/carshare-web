@@ -3,8 +3,9 @@ import { Router } from '@angular/router';
 import { Headers } from '@angular/http';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
-import * as firebase from 'firebase/app';
 import { DataStoreService } from '../../data-store.service';
+
+import * as firebase from 'firebase/app';
 
 @Injectable()
 export class AuthService {
